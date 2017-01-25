@@ -19,6 +19,24 @@
     <p>Keeping track of my to do list</p>
   </div>
 
+
+      <div class="row">
+        <div class="col-xs-12">
+          <h3>Add Todo</h3>
+          <form class="form-inline">
+            <div class="form-group">
+              <label for="exampleInputName2">title</label>
+              <input type="text" class="form-control" id="todoTitle" placeholder="title">
+            </div>
+            <div class="form-group">
+              <label for="exampleInputName2">due date</label>
+              <input type="date" class="form-control" id="todoDate">
+            </div>
+            <button type="submit" class="btn btn-default submitTodo">Create</button>
+          </form>
+        </div>
+      </div>
+
     <div class="row">
       <div class="col-xs-12">
         <table class="table table-striped">
@@ -39,11 +57,11 @@
     <div class="row">
       <div class="col-xs-12">
         <table class="table table-striped">
-          <h3>Add ToDo</h3>
+          <h3>To Dones</h3>
           <thead>
             <tr>
               <th>name</th>
-              <th>date</th>
+              <th>due date</th>
               <th></th>
             </tr>
           </thead>

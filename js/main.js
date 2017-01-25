@@ -30,6 +30,16 @@ $(document).ready(function(){
 
   loadTodos(todos);
 
+  function createTodo(e) {
+    e.preventDefault();
+
+    var title = $("#todoTitle").val();
+    var date = $("#todoDate").val();
+    var id = todos.length + 1;
+    todos.push({title: title, date: date, id: id});
+    loadTodos(todos);
+  }
+
   function completeTodo(){
 
     $(this).closest('tr').remove();
@@ -44,5 +54,6 @@ $(document).ready(function(){
   }
 
   $(".markComplete").on('click', completeTodo);
+  $(".submitTodo").on('click', createTodo);
 
 });
