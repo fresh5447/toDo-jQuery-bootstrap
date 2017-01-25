@@ -1,11 +1,11 @@
 var todos = [
 
-  { id: 0, title: "master js", date: '01/01/01' },
-  { id: 1, title: "master css", date: '01/01/01' },
-  { id: 2, title: "master html", date: '01/01/01' },
-  { id: 3, title: "master node", date: '01/01/01' },
-  { id: 4, title: "master react", date: '01/01/01' },
-  { id: 5, title: "master poetry", date: '01/01/01' }
+  { id: new Date().getUTCMilliseconds(), title: "master js", date: '01/01/01' },
+  { id: new Date().getUTCMilliseconds(), title: "master css", date: '01/01/01' },
+  { id: new Date().getUTCMilliseconds(), title: "master html", date: '01/01/01' },
+  { id: new Date().getUTCMilliseconds(), title: "master node", date: '01/01/01' },
+  { id: new Date().getUTCMilliseconds(), title: "master react", date: '01/01/01' },
+  { id: new Date().getUTCMilliseconds(), title: "master poetry", date: '01/01/01' }
 ]
 
 var completes = [];
@@ -35,7 +35,7 @@ $(document).ready(function(){
 
     var title = $("#todoTitle").val();
     var date = $("#todoDate").val();
-    var id = todos.length + 1;
+    var id = new Date().getUTCMilliseconds();
     todos.push({title: title, date: date, id: id});
     loadTodos(todos);
   }
