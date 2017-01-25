@@ -21,12 +21,10 @@ $(document).ready(function(){
 
   };
 
-  function loadCompletes(arr){
+  function addComplete(t){
     var table = $("#completes-list");
 
-    for (var i = 0; i < arr.length; i++) {
-      table.append('<tr id="' + arr[i].id  +'"> <td>' +  arr[i].title + '</td> <td> ' + arr[i].date + '</td> <td><button class="markComplete"> complete </button></td> </tr>')
-    }
+    table.append('<tr id="' + t.id  +'"> <td>' +  t.title + '</td> <td> ' + t.date + '</td> <td><button class="undoComplete"> undo </button></td> </tr>')
 
   };
 
@@ -38,14 +36,11 @@ $(document).ready(function(){
 
     var id = $(this).closest('tr').attr('id');
 
-
     var removedTodo = todos.filter(function( item ) {
       return item.id == id;
     });
 
-    completes.push(removedTodo[0]);
-
-    loadCompletes(completes);
+    addComplete(removedTodo[0]);
   }
 
   $(".markComplete").on('click', completeTodo);
