@@ -1,23 +1,26 @@
-var todos = [
-
-  { id: new Date().getUTCMilliseconds(), title: "master js", date: '01/01/01' },
-  { id: new Date().getUTCMilliseconds(), title: "master css", date: '01/01/01' },
-  { id: new Date().getUTCMilliseconds(), title: "master html", date: '01/01/01' },
-  { id: new Date().getUTCMilliseconds(), title: "master node", date: '01/01/01' },
-  { id: new Date().getUTCMilliseconds(), title: "master react", date: '01/01/01' },
-  { id: new Date().getUTCMilliseconds(), title: "master poetry", date: '01/01/01' }
-]
-
 var completes = [];
 
 $(document).ready(function(){
 
-  function loadTodos(arr){
-    var table = $("#todo-list");
+  function loadTodos(){
+    var todos = [];
 
-    for (var i = 0; i < arr.length; i++) {
-      table.append('<tr id="' + arr[i].id  +'"> <td>' +  arr[i].title + '</td> <td> ' + arr[i].date + '</td> <td><button class="markComplete"> complete </button></td> </tr>')
+    function getAllTodos() {
+      return db.ref('/todos/').once('value').then(function(snapshot) {
+
+        for (var i = 0; i < Object.keys(snapshot.val()).length; i++) {
+          todos.push({id: Object.keys(snapshot.val())[i], title: t[Object.keys(snapshot.val())[i]].title, date: t[Object.keys(snapshot.val())[i]].date})
+        }
+
+        var table = $("#todo-list");
+
+        for (var i = 0; i < todos.length; i++) {
+          table.append('<tr id="' + todos[i].id  +'"> <td>' +  todos[i].title + '</td> <td> ' + todos[i].date + '</td> <td><button class="markComplete"> complete </button></td> </tr>')
+        }
+      });
     }
+
+    getAllTodos();
 
   };
 
@@ -26,7 +29,7 @@ $(document).ready(function(){
     table.append('<tr id="' + t.id  +'"> <td>' +  t.title + '</td> <td> ' + t.date + '</td> <td><button class="undoComplete"> undo </button></td> </tr>')
   };
 
-  loadTodos(todos);
+  loadTodos();
 
   function createTodo(e) {
     e.preventDefault();

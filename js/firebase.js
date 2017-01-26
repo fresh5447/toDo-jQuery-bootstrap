@@ -13,12 +13,20 @@ var config = {
  function postToDoToDatabase(title, date) {
    db.ref('todos/').push({
      title: title,
-     date: date
+     date: date,
+     id: new Date().getUTCMilliseconds()
    });
+   window.location = '/';
  }
 
  function getToDoById(id) {
    return db.ref('/todos/' + id).once('value').then(function(snapshot) {
      console.log(snapshot.val())
+   });
+ }
+
+ function deleteTodo() {
+   return db.ref('/todos/-KbNIh3VypSxEAx4yhSi').once('value').then(function(snapshot) {
+     console.log("")
    });
  }
