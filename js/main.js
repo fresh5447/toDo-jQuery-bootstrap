@@ -13,7 +13,7 @@ $(document).ready(function(){
         }
 
         for (var i = 0; i < Object.keys(snapshot.val()).length; i++) {
-          todos.push({id: Object.keys(snapshot.val())[i], title: t[Object.keys(snapshot.val())[i]].title, date: t[Object.keys(snapshot.val())[i]].date})
+          todos.push({id: Object.keys(snapshot.val())[i], title: snapshot.val()[Object.keys(snapshot.val())[i]].title, date: snapshot.val()[Object.keys(snapshot.val())[i]].date})
         }
 
         var table = $("#todo-list");
