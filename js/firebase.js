@@ -30,3 +30,13 @@ var config = {
      console.log("")
    });
  }
+
+
+
+ function getThem() {
+   return db.ref('/todos/').once('value').then(function(snapshot) {
+     console.log(snapshot.val())
+   });
+ }
+
+ // getThem();

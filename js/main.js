@@ -16,6 +16,8 @@ $(document).ready(function(){
           todos.push({id: Object.keys(snapshot.val())[i], title: snapshot.val()[Object.keys(snapshot.val())[i]].title, date: snapshot.val()[Object.keys(snapshot.val())[i]].date, complete: false})
         }
 
+        console.log(todos);
+
         var table = $("#todo-list");
 
         var incompleteTodos = todos.filter(function(item){
