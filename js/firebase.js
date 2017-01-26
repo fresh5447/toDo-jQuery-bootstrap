@@ -7,12 +7,18 @@ var config = {
  };
  firebase.initializeApp(config);
 
- var database = firebase.database();
+ var db = firebase.database();
 
 
  function postToDoToDatabase(title, date) {
-   firebase.database().ref('todos/').push({
+   db.ref('todos/').push({
      title: title,
      date: date
+   });
+ }
+
+ function getToDoById(id) {
+   return db.ref('/todos/' + id).once('value').then(function(snapshot) {
+     console.log(snapshot.val())
    });
  }

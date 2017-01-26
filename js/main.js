@@ -35,7 +35,7 @@ $(document).ready(function(){
     var date = $("#todoDate").val();
 
     postToDoToDatabase(title, date);
-  
+
   }
 
   function completeTodo(){
