@@ -33,9 +33,9 @@ $(document).ready(function(){
 
     var title = $("#todoTitle").val();
     var date = $("#todoDate").val();
-    var id = new Date().getUTCMilliseconds();
-    todos.push({title: title, date: date, id: id});
-    loadTodos(todos);
+
+    postToDoToDatabase(title, date);
+  
   }
 
   function completeTodo(){

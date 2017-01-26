@@ -10,12 +10,9 @@ var config = {
  var database = firebase.database();
 
 
- function writeTodoData() {
-   firebase.database().ref('todos/').set({
-     title: "Your First ToDo",
-     date: "02/02/17",
-     id: 234234234
+ function postToDoToDatabase(title, date) {
+   firebase.database().ref('todos/').push({
+     title: title,
+     date: date
    });
  }
-
- writeTodoData();
