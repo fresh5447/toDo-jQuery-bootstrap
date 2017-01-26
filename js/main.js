@@ -1,59 +1,91 @@
+// function handleClick() {
+//   var newText = $("#greetingText").val();
+//   $(this).text($(this).next().val());
+// }
+
+function handleClick() {
+  var text = $("#greetingText").val();
+  $(this).text(text);
+}
+
+$('#greeting').on( 'click', handleClick );
+
+function onBtnEnter() {
+    $(this).css({ 'background-color': 'red' });
+}
+
+function onBtnExit() {
+    $(this).css({ 'background-color': 'blue' });
+}
+
+$('#greeting').on('mouseover', onBtnEnter );
+$('#greeting').on('mouseleave', onBtnExit );
+
+
 var todos = [
+  { id: Math.floor(Math.random()*100), title: "Get Blackbelt", date: '11/11/17'  },
+  { id: Math.floor(Math.random()*100), title: "Takeover World", date: '11/11/18'  },
+  { id: Math.floor(Math.random()*100), title: "Takeup Nitting", date: '11/11/19'  },
+  { id: Math.floor(Math.random()*100), title: "Retire", date: '11/11/20'  }
+];
 
-  { id: new Date().getUTCMilliseconds(), title: "master js", date: '01/01/01' },
-  { id: new Date().getUTCMilliseconds(), title: "master css", date: '01/01/01' },
-  { id: new Date().getUTCMilliseconds(), title: "master html", date: '01/01/01' },
-  { id: new Date().getUTCMilliseconds(), title: "master node", date: '01/01/01' },
-  { id: new Date().getUTCMilliseconds(), title: "master react", date: '01/01/01' },
-  { id: new Date().getUTCMilliseconds(), title: "master poetry", date: '01/01/01' }
-]
+var completedTodos = [];
 
-var completes = [];
 
-$(document).ready(function(){
-
-  function loadTodos(arr){
-    var table = $("#todo-list");
-
-    for (var i = 0; i < arr.length; i++) {
-      table.append('<tr id="' + arr[i].id  +'"> <td>' +  arr[i].title + '</td> <td> ' + arr[i].date + '</td> <td><button class="markComplete"> complete </button></td> </tr>')
-    }
-
-  };
-
-  function addComplete(t){
-    var table = $("#completes-list");
-
-    table.append('<tr id="' + t.id  +'"> <td>' +  t.title + '</td> <td> ' + t.date + '</td> <td><button class="undoComplete"> undo </button></td> </tr>')
-
-  };
-
-  loadTodos(todos);
-
-  function createTodo(e) {
-    e.preventDefault();
-
-    var title = $("#todoTitle").val();
-    var date = $("#todoDate").val();
-    var id = new Date().getUTCMilliseconds();
-    todos.push({title: title, date: date, id: id});
-    loadTodos(todos);
+function renderToDosToPage(arr) {
+  for (var i = 0; i < arr.length; i++) {
+    $("#todo-list").append('<tr> <td>'+
+                            arr[i].title + '</td> <td>' + arr[i].date + '</td> <td> <button id="' +
+                            arr[i].id +'" class="completeTodoBtn"> complete </button> </td> </tr>');
   }
+}
 
-  function completeTodo(){
+renderToDosToPage(todos);
 
-    $(this).closest('tr').remove();
+function markComplete() {
+  //$this = complete btn todo
+  $(this).closest('tr').remove();
 
-    var id = $(this).closest('tr').attr('id');
+  //gets the id of the specifc todo we are looking for
+  var id = $(this).attr('id');
 
-    var removedTodo = todos.filter(function( item ) {
-      return item.id == id;
-    });
+  //grabs the todo out of the todos list with the matching id
+  var toDone = todos.filter(function(item) {
+    return item.id == id
+  });
 
-    addComplete(removedTodo[0]);
-  }
+  //render complete todo to page.
+  addToCompleteList(toDone[0]);
 
-  $(".markComplete").on('click', completeTodo);
-  $(".submitTodo").on('click', createTodo);
+}
 
-});
+function addToCompleteList(todo) {
+  //take todo and append it to complete todos list
+  $('#completes-list').append('<tr id="' + todo.id  +'"> <td>' +
+    todo.title + '</td> <td> ' + todo.date + '</td> <td><button class="undoComplete"> undo </button></td> </tr>')
+}
+
+$(".completeTodoBtn").on('click', markComplete);
+
+
+
+function createNewTodo(e) {
+
+  // GET VALUES FOR TODO TITLE AND TODO Date
+  // MAKE AN OBJECT WITH THESE VALUES
+  // NEED TO APPEND THIS OBJECT TO TODO LIST
+
+  e.preventDefault();
+
+  var title = $("#todoTitle").val();
+  var date = $("#todoDate").val();
+  var id = Math.floor(Math.random()*100)
+
+  $("#todo-list").append('<tr> <td>'+
+                          title + '</td> <td>' + date + '</td> <td> <button id="' +
+                          id +'" class="completeTodoBtn"> complete </button> </td> </tr>');
+
+  $(".completeTodoBtn").on('click', markComplete);
+}
+
+$(".submitTodo").on('click', createNewTodo);
