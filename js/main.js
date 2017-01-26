@@ -13,14 +13,19 @@ $(document).ready(function(){
         }
 
         for (var i = 0; i < Object.keys(snapshot.val()).length; i++) {
-          todos.push({id: Object.keys(snapshot.val())[i], title: snapshot.val()[Object.keys(snapshot.val())[i]].title, date: snapshot.val()[Object.keys(snapshot.val())[i]].date})
+          todos.push({id: Object.keys(snapshot.val())[i], title: snapshot.val()[Object.keys(snapshot.val())[i]].title, date: snapshot.val()[Object.keys(snapshot.val())[i]].date, complete: false})
         }
 
         var table = $("#todo-list");
 
-        for (var i = 0; i < todos.length; i++) {
-          table.append('<tr id="' + todos[i].id  +'"> <td>' +  todos[i].title + '</td> <td> ' + todos[i].date + '</td> <td><button class="markComplete"> complete </button></td> </tr>')
+        var incompleteTodos = todos.filter(function(item){
+          return !item.complete
+        })
+
+        for (var i = 0; i < incompleteTodos.length; i++) {
+          table.append('<tr id="' + incompleteTodos[i].id  +'"> <td>' +  incompleteTodos[i].title + '</td> <td> ' + incompleteTodos[i].date + '</td> <td><button class="markComplete"> complete </button></td> </tr>')
         }
+
       });
     }
 
@@ -47,9 +52,17 @@ $(document).ready(function(){
 
   function completeTodo(){
 
-    $(this).closest('tr').remove();
-
     var id = $(this).closest('tr').attr('id');
+
+    console.log(id)
+
+    // function getToDoById(id) {
+    //   return db.ref('/todos/' + id).once('value').then(function(snapshot) {
+    //     console.log(" Snap shot of ToDo",snapshot.val())
+    //   });
+    // }
+    //
+    // getToDoById()
 
     var removedTodo = todos.filter(function( item ) {
       return item.id == id;
