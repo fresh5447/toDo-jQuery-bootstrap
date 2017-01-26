@@ -8,6 +8,10 @@ $(document).ready(function(){
     function getAllTodos() {
       return db.ref('/todos/').once('value').then(function(snapshot) {
 
+        if(!snapshot.val()) {
+          return
+        }
+
         for (var i = 0; i < Object.keys(snapshot.val()).length; i++) {
           todos.push({id: Object.keys(snapshot.val())[i], title: t[Object.keys(snapshot.val())[i]].title, date: t[Object.keys(snapshot.val())[i]].date})
         }
