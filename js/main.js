@@ -1,16 +1,3 @@
-var config = {
-  apiKey: "AIzaSyCuplVsc4jhzXn1wEcjn6lrh8zx6JaQzAw",
-  authDomain: "jquery-todo-662f8.firebaseapp.com",
-  databaseURL: "https://jquery-todo-662f8.firebaseio.com",
-  storageBucket: "jquery-todo-662f8.appspot.com",
-  messagingSenderId: "573512969580"
-};
-
-firebase.initializeApp(config);
-var database = firebase.database();
-
-
-
 var todos = [
 
   { id: new Date().getUTCMilliseconds(), title: "master js", date: '01/01/01' },
